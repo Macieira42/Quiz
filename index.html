@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quiz do Matheus & Aline</title>
   <style>
     :root {
@@ -26,14 +27,16 @@
     h1 {
       color: var(--primary);
       text-align: center;
+      font-size: 28px;
+      margin-bottom: 20px;
     }
 
     .quiz-container {
       background: white;
-      padding: 30px;
-      border-radius: 10px;
+      padding: 20px;
+      border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      max-width: 600px;
+      max-width: 500px;
       width: 100%;
     }
 
@@ -43,17 +46,19 @@
 
     .question p {
       font-weight: bold;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      font-size: 18px;
     }
 
     label {
       display: block;
       background: var(--secondary);
-      margin-bottom: 8px;
-      padding: 10px;
-      border-radius: 6px;
+      margin-bottom: 10px;
+      padding: 14px;
+      border-radius: 8px;
       cursor: pointer;
       transition: background 0.3s;
+      font-size: 16px;
     }
 
     label:hover {
@@ -61,31 +66,46 @@
     }
 
     input[type="radio"] {
-      margin-right: 8px;
+      margin-right: 10px;
+      transform: scale(1.2);
     }
 
     button {
       background: var(--button);
       border: none;
       color: white;
-      padding: 12px 30px;
+      padding: 15px 30px;
       border-radius: 30px;
-      font-size: 16px;
+      font-size: 18px;
       cursor: pointer;
       transition: background 0.3s;
-      margin-top: 20px;
+      width: 100%;
     }
 
     button:hover {
       background: #6a1b9a;
     }
 
-    @media (max-width: 600px) {
-      .quiz-container {
-        padding: 20px;
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 24px;
       }
+
+      .quiz-container {
+        padding: 15px;
+      }
+
+      .question p {
+        font-size: 16px;
+      }
+
+      label {
+        font-size: 15px;
+      }
+
       button {
-        width: 100%;
+        font-size: 16px;
+        padding: 12px 20px;
       }
     }
   </style>
@@ -100,56 +120,16 @@
 
   <script>
     const questions = [
-      {
-        question: "Em qual mês Matheus faz aniversário?",
-        options: ["Março", "Maio", "Junho", "Setembro"],
-        answer: 2
-      },
-      {
-        question: "Em qual mês Aline faz aniversário?",
-        options: ["Outubro", "Novembro", "Dezembro", "Janeiro"],
-        answer: 2
-      },
-      {
-        question: "Qual é a comida preferida do Matheus?",
-        options: ["Pizza", "Churrasco", "Sushi", "Lasanha"],
-        answer: 3
-      },
-      {
-        question: "Qual é o nome da filha do casal?",
-        options: ["Madah", "Maluh", "Nina", "Duda"],
-        answer: 0
-      },
-      {
-        question: "Em que ano Matheus e Aline começaram a namorar?",
-        options: ["2010", "2011", "2012", "2013"],
-        answer: 1
-      },
-      {
-        question: "Qual é o anime favorito do Matheus?",
-        options: ["One Piece", "Naruto", "Bleach", "Dragon Ball"],
-        answer: 0
-      },
-      {
-        question: "O que a Aline mais gosta de fazer?",
-        options: ["Ler livro", "Assistir Dorama", "Sair com amigos", "Cozinhar"],
-        answer: 1
-      },
-      {
-        question: "Qual local eles mais gostam de visitar?",
-        options: ["Milho Verde", "Diamantina", "Ouro Preto", "Tiradentes"],
-        answer: 0
-      },
-      {
-        question: "Qual o programa favorito para o fim de semana?",
-        options: ["Ficar em casa", "Ir ao cinema", "Viajar", "Reunir com amigos"],
-        answer: 0
-      },
-      {
-        question: "Qual a cantora preferida da Madah?",
-        options: ["Galinha Pintadinha", "Anitta", "Marília Mendonça", "Ana Castela"],
-        answer: 3
-      }
+      { question: "Em qual mês Matheus faz aniversário?", options: ["Março", "Maio", "Junho", "Setembro"], answer: 2 },
+      { question: "Em qual mês Aline faz aniversário?", options: ["Outubro", "Novembro", "Dezembro", "Janeiro"], answer: 2 },
+      { question: "Qual é a comida preferida do Matheus?", options: ["Pizza", "Churrasco", "Sushi", "Lasanha"], answer: 3 },
+      { question: "Qual é o nome da filha do casal?", options: ["Madah", "Maluh", "Nina", "Duda"], answer: 0 },
+      { question: "Em que ano Matheus e Aline começaram a namorar?", options: ["2010", "2011", "2012", "2013"], answer: 1 },
+      { question: "Qual é o anime favorito do Matheus?", options: ["One Piece", "Naruto", "Bleach", "Dragon Ball"], answer: 0 },
+      { question: "O que a Aline mais gosta de fazer?", options: ["Ler livro", "Assistir Dorama", "Sair com amigos", "Cozinhar"], answer: 1 },
+      { question: "Qual local eles mais gostam de visitar?", options: ["Milho Verde", "Diamantina", "Ouro Preto", "Tiradentes"], answer: 0 },
+      { question: "Qual o programa favorito para o fim de semana?", options: ["Ficar em casa", "Ir ao cinema", "Viajar", "Reunir com amigos"], answer: 0 },
+      { question: "Qual a cantora preferida da Madah?", options: ["Galinha Pintadinha", "Anitta", "Marília Mendonça", "Ana Castela"], answer: 3 }
     ];
 
     const form = document.getElementById('quizForm');
@@ -197,6 +177,7 @@
         <html>
         <head>
           <title>Resultado do Quiz</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <style>
             body {
               margin: 0;
@@ -212,18 +193,18 @@
             }
             .result-box {
               background: white;
-              padding: 40px;
+              padding: 30px;
               border-radius: 16px;
               box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-              max-width: 600px;
+              max-width: 90%;
             }
             .result-box h1 {
               color: #7e57c2;
-              font-size: 32px;
+              font-size: 28px;
               margin-bottom: 20px;
             }
             .result-box p {
-              font-size: 20px;
+              font-size: 18px;
               line-height: 1.6;
             }
             .emoji {
