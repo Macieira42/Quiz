@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz do Matheus & Aline</title>
+  <style>
+    :root {
+      --primary: #7e57c2;
+      --secondary: #f3e5f5;
+      --button: #9575cd;
+      --text: #333;
+      --background: #fafafa;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--text);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: var(--primary);
+      text-align: center;
+    }
+
+    .quiz-container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .question {
+      margin-bottom: 20px;
+    }
+
+    .question p {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    label {
+      display: block;
+      background: var(--secondary);
+      margin-bottom: 8px;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    label:hover {
+      background: #e1bee7;
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    button {
+      background: var(--button);
+      border: none;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background: #6a1b9a;
+    }
+
+    @media (max-width: 600px) {
+      .quiz-container {
+        padding: 20px;
+      }
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Quiz Especial do Matheus & Aline</h1>
+  <div class="quiz-container">
+    <form id="quizForm"></form>
+    <button onclick="checkAnswers()">Revelar Resultado</button>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "Em qual mês Matheus faz aniversário?",
+        options: ["Março", "Maio", "Junho", "Setembro"],
+        answer: 2
+      },
+      {
+        question: "Em qual mês Aline faz aniversário?",
+        options: ["Outubro", "Novembro", "Dezembro", "Janeiro"],
+        answer: 2
+      },
+      {
+        question: "Qual é a comida preferida do Matheus?",
+        options: ["Pizza", "Churrasco", "Sushi", "Lasanha"],
+        answer: 3
+      },
+      {
+        question: "Qual é o nome da filha do casal?",
+        options: ["Madah", "Maluh", "Nina", "Duda"],
+        answer: 0
+      },
+      {
+        question: "Em que ano Matheus e Aline começaram a namorar?",
+        options: ["2010", "2011", "2012", "2013"],
+        answer: 1
+      },
+      {
+        question: "Qual é o anime favorito do Matheus?",
+        options: ["One Piece", "Naruto", "Bleach", "Dragon Ball"],
+        answer: 0
+      },
+      {
+        question: "O que a Aline mais gosta de fazer?",
+        options: ["Ler livro", "Assistir Dorama", "Sair com amigos", "Cozinhar"],
+        answer: 1
+      },
+      {
+        question: "Qual local eles mais gostam de visitar?",
+        options: ["Milho Verde", "Diamantina", "Ouro Preto", "Tiradentes"],
+        answer: 0
+      },
+      {
+        question: "Qual o programa favorito para o fim de semana?",
+        options: ["Ficar em casa", "Ir ao cinema", "Viajar", "Reunir com amigos"],
+        answer: 0
+      },
+      {
+        question: "Qual a cantora preferida da Madah?",
+        options: ["Galinha Pintadinha", "Anitta", "Marília Mendonça", "Ana Castela"],
+        answer: 3
+      }
+    ];
+
+    const form = document.getElementById('quizForm');
+
+    questions.forEach((q, index) => {
+      const div = document.createElement('div');
+      div.classList.add('question');
+      div.innerHTML = `<p>${index + 1}. ${q.question}</p>`;
+      q.options.forEach((option, i) => {
+        div.innerHTML += `
+          <label>
+            <input type="radio" name="q${index}" value="${i}">
+            ${option}
+          </label>
+        `;
+      });
+      form.appendChild(div);
+    });
+
+    function checkAnswers() {
+      let score = 0;
+      questions.forEach((q, index) => {
+        const selected = document.querySelector(`input[name="q${index}"]:checked`);
+        if (selected && Number(selected.value) === q.answer) {
+          score++;
+        }
+      });
+
+      const resultPage = window.open("", "_blank");
+
+      let message = "";
+      if (score === 0) {
+        message = `😅 Você não acertou nenhuma! Que tipo de amizade é essa?<br><br>Mas tudo bem… ainda vai ter tempo de aprender com o novo bebê que está chegando! 💖👶`;
+      } else if (score <= 3) {
+        message = `🤔 Você acertou ${score} de 10 perguntas.<br><br>Ainda bem que agora vai ter mais um membro na família pra te ajudar a nos conhecer melhor: vem aí o nosso novo bebê! 🍼✨`;
+      } else if (score <= 6) {
+        message = `👏 Você acertou ${score} de 10!<br><br>Tá quase lá! Mas essa notícia vai te ajudar a ficar mais por dentro: Madah vai ganhar um irmãozinho ou irmãzinha! 👶🎉`;
+      } else if (score <= 9) {
+        message = `🎯 ${score} acertos! Você nos conhece muito bem!<br><br>E por isso merece saber primeiro: vem um bebê por aí! 💕🍼`;
+      } else {
+        message = `🌟 PERFEITO! Você acertou tudo!<br><br>Você é um amigo/parente nota 10, tio/tia incrível da Madah...<br><strong>...e agora, do novo bebê também! 👶💖</strong>`;
+      }
+
+      resultPage.document.write(`
+        <html>
+        <head>
+          <title>Resultado do Quiz</title>
+          <style>
+            body {
+              margin: 0;
+              padding: 0;
+              font-family: 'Segoe UI', sans-serif;
+              background: linear-gradient(to bottom right, #fce4ec, #ede7f6);
+              color: #333;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+              text-align: center;
+            }
+            .result-box {
+              background: white;
+              padding: 40px;
+              border-radius: 16px;
+              box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+              max-width: 600px;
+            }
+            .result-box h1 {
+              color: #7e57c2;
+              font-size: 32px;
+              margin-bottom: 20px;
+            }
+            .result-box p {
+              font-size: 20px;
+              line-height: 1.6;
+            }
+            .emoji {
+              font-size: 48px;
+              margin-bottom: 10px;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="result-box">
+            <div class="emoji">🎉👶💖</div>
+            <h1>Resultado do Quiz</h1>
+            <p>${message}</p>
+          </div>
+        </body>
+        </html>
+      `);
+    }
+  </script>
+
+</body>
+</html>
