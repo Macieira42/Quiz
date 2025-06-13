@@ -31,7 +31,7 @@
       margin-bottom: 20px;
     }
 
-    .quiz-container {
+    .quiz-container, .result-box {
       background: white;
       padding: 20px;
       border-radius: 12px;
@@ -86,6 +86,27 @@
       background: #6a1b9a;
     }
 
+    .result-box {
+      display: none;
+      text-align: center;
+    }
+
+    .result-box h1 {
+      color: #7e57c2;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .result-box p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .emoji {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
     @media (max-width: 480px) {
       h1 {
         font-size: 24px;
@@ -107,15 +128,33 @@
         font-size: 16px;
         padding: 12px 20px;
       }
+
+      .result-box h1 {
+        font-size: 24px;
+      }
+
+      .result-box p {
+        font-size: 16px;
+      }
+
+      .emoji {
+        font-size: 36px;
+      }
     }
   </style>
 </head>
 <body>
 
   <h1>Quiz Especial do Matheus & Aline</h1>
-  <div class="quiz-container">
+  <div class="quiz-container" id="quiz-container">
     <form id="quizForm"></form>
     <button onclick="checkAnswers()">Revelar Resultado</button>
+  </div>
+
+  <div class="result-box" id="result-box">
+    <div class="emoji">🎉👶💖</div>
+    <h1>Resultado do Quiz</h1>
+    <p id="result-message"></p>
   </div>
 
   <script>
@@ -158,8 +197,6 @@
         }
       });
 
-      const resultPage = window.open("", "_blank");
-
       let message = "";
       if (score === 0) {
         message = `😅 Você não acertou nenhuma! Que tipo de amizade é essa?<br><br>Mas tudo bem… ainda vai ter tempo de aprender com o novo bebê que está chegando! 💖👶`;
@@ -173,68 +210,10 @@
         message = `🌟 PERFEITO! Você acertou tudo!<br><br>Você é um amigo/parente nota 10, tio/tia incrível da Madah...<br><strong>...e agora, do novo bebê também! 👶💖</strong>`;
       }
 
-      resultPage.document.write(`
-        <html>
-        <head>
-          <title>Resultado do Quiz</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <style>
-            body {
-              margin: 0;
-              padding: 0;
-              font-family: 'Segoe UI', sans-serif;
-              background: linear-gradient(to bottom right, #fce4ec, #ede7f6);
-              color: #333;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              min-height: 100vh;
-              text-align: center;
-            }
-            .result-box {
-              background: white;
-              padding: 30px 20px;
-              border-radius: 16px;
-              box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-              max-width: 500px;
-              width: 90%;
-            }
-            .result-box h1 {
-              color: #7e57c2;
-              font-size: 8vw;
-              margin-bottom: 20px;
-            }
-            .result-box p {
-              font-size: 5vw;
-              line-height: 1.6;
-            }
-            .emoji {
-              font-size: 12vw;
-              margin-bottom: 10px;
-            }
-
-            @media (min-width: 600px) {
-              .result-box h1 {
-                font-size: 32px;
-              }
-              .result-box p {
-                font-size: 20px;
-              }
-              .emoji {
-                font-size: 48px;
-              }
-            }
-          </style>
-        </head>
-        <body>
-          <div class="result-box">
-            <div class="emoji">🎉👶💖</div>
-            <h1>Resultado do Quiz</h1>
-            <p>${message}</p>
-          </div>
-        </body>
-        </html>
-      `);
+      // Esconde o quiz e mostra o resultado
+      document.getElementById('quiz-container').style.display = 'none';
+      document.getElementById('result-message').innerHTML = message;
+      document.getElementById('result-box').style.display = 'block';
     }
   </script>
 
