@@ -188,28 +188,41 @@
               display: flex;
               justify-content: center;
               align-items: center;
-              height: 100vh;
+              min-height: 100vh;
               text-align: center;
             }
             .result-box {
               background: white;
-              padding: 30px;
+              padding: 30px 20px;
               border-radius: 16px;
               box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-              max-width: 90%;
+              max-width: 500px;
+              width: 90%;
             }
             .result-box h1 {
               color: #7e57c2;
-              font-size: 28px;
+              font-size: 8vw;
               margin-bottom: 20px;
             }
             .result-box p {
-              font-size: 18px;
+              font-size: 5vw;
               line-height: 1.6;
             }
             .emoji {
-              font-size: 48px;
+              font-size: 12vw;
               margin-bottom: 10px;
+            }
+
+            @media (min-width: 600px) {
+              .result-box h1 {
+                font-size: 32px;
+              }
+              .result-box p {
+                font-size: 20px;
+              }
+              .emoji {
+                font-size: 48px;
+              }
             }
           </style>
         </head>
@@ -227,4 +240,4 @@
 
 </body>
 </html>
-Atualizar para versão mobile
+
